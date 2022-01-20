@@ -110,7 +110,19 @@ const run = async () => {
    * **/
   var indexValue = indexValueKey + "_R" + clearanceOrderAndSn.sn;
   var timestamp = Date.now();
-  var cmd = `{"text":"Put some messages here for attestation","description":"here is a description", "callerAddress":"${callerAddress}", "timestamp":${timestamp}}`;
+
+  // edit data you want to attest here
+  const cmdObject = {
+    text: "Put some messages here for attestation",
+    description: "here is a description",
+    otherField: "Put other fields if needed",
+    timestamp: timestamp,
+    callerAddress: callerAddress,
+  };
+  // make sure CMD is in JSON format!!
+  var cmd = JSON.stringify(cmdObject);
+  console.log(cmd);
+
   var metadata = "More description of this attestation data";
   var ledgerInputResponse = await ledgerInput(
     callerAddress,
